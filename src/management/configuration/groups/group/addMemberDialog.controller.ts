@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 import * as _ from 'lodash';
+<<<<<<< HEAD:src/management/configuration/group/addMemberDialog.controller.ts
 import UserService from '../../../services/user.service';
+=======
+import UserService from "../../../../services/user.service";
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0:src/management/configuration/groups/group/addMemberDialog.controller.ts
 
 export class Role {
   default: boolean;

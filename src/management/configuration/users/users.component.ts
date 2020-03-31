@@ -13,11 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD
 import UserService from '../../../services/user.service';
 import NotificationService from '../../../services/notification.service';
 import {User} from '../../../entities/user';
 import { StateService } from '@uirouter/core';
 import {IScope} from 'angular';
+=======
+import UserService from "../../../services/user.service";
+import NotificationService from "../../../services/notification.service";
+import {User} from "../../../entities/user";
+import {StateService} from '@uirouter/core';
+import {IScope} from "angular";
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 
 const UsersComponent: ng.IComponentOptions = {
   bindings: {
@@ -29,7 +37,8 @@ const UsersComponent: ng.IComponentOptions = {
     NotificationService: NotificationService,
     $mdDialog: angular.material.IDialogService,
     $state: StateService,
-    $rootScope: IScope
+    $rootScope: IScope,
+    $window
   ) {
     'ngInject';
     this.$rootScope = $rootScope;
@@ -61,8 +70,14 @@ const UsersComponent: ng.IComponentOptions = {
     };
 
     this.onPaginate = (page: number) => {
+<<<<<<< HEAD
       UserService.list(this.query, page).then((response) => {
+=======
+      $window.localStorage['usersTablePage'] = page;
+      UserService.list(this.query, page).then((response)=> {
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
         this.usersPage = response.data;
+        $state.go('.', {page: page});
       });
     };
 
@@ -71,7 +86,9 @@ const UsersComponent: ng.IComponentOptions = {
     };
 
     this.search = () => {
-      $state.go('.', {q: this.query});
+      $window.localStorage['usersTableQuery'] = this.query;
+      $window.localStorage['usersTablePage'] = 1;
+      $state.go('.', {q: this.query, page: 1});
     };
 
     this.newUser = () => {

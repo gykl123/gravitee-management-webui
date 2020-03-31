@@ -15,9 +15,15 @@
  */
 import UserService from '../../services/user.service';
 import {IScope} from 'angular';
+<<<<<<< HEAD
 import { StateService } from '@uirouter/core';
 import { User } from '../../entities/user';
 import RouterService from '../../services/router.service';
+=======
+import {StateParams, StateService} from '@uirouter/core';
+import { User } from "../../entities/user";
+import RouterService from "../../services/router.service";
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 import * as _ from 'lodash';
 import { IdentityProvider } from '../../entities/identityProvider';
 import AuthenticationService from '../../services/authentication.service';
@@ -36,7 +42,8 @@ class LoginController {
     private $rootScope: IScope,
     private RouterService: RouterService,
     private identityProviders,
-    private $window
+    private $window,
+    private $stateParams: StateParams
   ) {
     'ngInject';
     this.userCreationEnabled = Constants.portal.userCreation.enabled;
@@ -46,9 +53,18 @@ class LoginController {
   }
 
   authenticate(identityProvider: string) {
+    let nonce = this.AuthenticationService.nonce(32);
+
+    this.$window.localStorage[nonce] = JSON.stringify({ redirectUri: this.$stateParams.redirectUri });
+
     let provider = _.find(this.identityProviders, {'id': identityProvider}) as IdentityProvider;
+<<<<<<< HEAD
     this.AuthenticationService.authenticate(provider);
   }
+=======
+    this.AuthenticationService.authenticate(provider, nonce);
+  };
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 
   login() {
     this.UserService.login(this.user).then(() => {
@@ -68,13 +84,12 @@ class LoginController {
       this.$window.location.href = '#!' + this.$state.params.redirectUri;
     } else {
       let route = this.RouterService.getLastRoute();
-      if (route.from && route.from.name !== '' && route.from.name !== 'logout' && route.from.name !== 'confirm') {
+      if (route.from && route.from.name !== '' && route.from.name !== 'logout' && route.from.name !== 'confirm' && route.from.name !== 'resetPassword') {
         this.$state.go(route.from.name, route.fromParams);
       } else {
         this.$state.go('management');
       }
     }
-
   }
 }
 

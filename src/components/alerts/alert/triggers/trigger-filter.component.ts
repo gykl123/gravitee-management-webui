@@ -13,10 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD:src/components/alerts/alert/triggers/trigger-filter.component.ts
 import {ApiMetrics} from '../../../../entities/alerts/api.metrics';
 import {NodeLifecycleMetrics, NodeMetrics} from '../../../../entities/alerts/node.metrics';
 import {HealthcheckMetrics} from '../../../../entities/alerts/healthcheck.metrics';
 import {Metrics} from '../../../../entities/alert';
+=======
+import {ApiMetrics} from "../../../../../entities/alerts/api.metrics";
+import {NodeHealthcheckMetrics, NodeLifecycleMetrics, NodeMetrics} from "../../../../../entities/alerts/node.metrics";
+import {HealthcheckMetrics} from "../../../../../entities/alerts/healthcheck.metrics";
+import {Metrics} from "../../../../../entities/alert";
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0:src/management/components/alerts/alert/triggers/trigger-filter.component.ts
 
 
 const AlertTriggerFilterComponent: ng.IComponentOptions = {
@@ -39,6 +46,8 @@ const AlertTriggerFilterComponent: ng.IComponentOptions = {
         this.metrics = Metrics.filterByScope(HealthcheckMetrics.METRICS, this.alert.reference_type);
       } else if (this.alert.source === 'NODE_LIFECYCLE') {
         this.metrics = Metrics.filterByScope(NodeLifecycleMetrics.METRICS, this.alert.reference_type);
+      } else if(this.alert.source === 'NODE_HEALTHCHECK') {
+        this.metrics = Metrics.filterByScope(NodeHealthcheckMetrics.METRICS, this.alert.reference_type);
       }
     };
 

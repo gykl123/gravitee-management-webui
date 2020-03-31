@@ -189,7 +189,7 @@
 
                             <span style="margin-left: 12px;">
                                 <a ng-style="page.published?'':{'font-style': 'italic', 'color': 'grey'}"
-                                   ng-href="{{$ctrl.openUrl(page)}}">
+                                   ng-click="$ctrl.openUrl(page)">
                                     {{page.name}}
                                 </a>
                                 <sup ng-if="page.homepage" class="icon-button-homepage">

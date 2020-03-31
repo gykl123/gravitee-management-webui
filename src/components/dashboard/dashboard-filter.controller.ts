@@ -48,7 +48,36 @@ class DashboardFilterController {
     }
   }
 
+<<<<<<< HEAD
   addFieldFilter(filter) {
+=======
+  private decodeQueryFilters(query) {
+    let filters = query.split("AND");
+    for (let i = 0; i < filters.length; i++) {
+      let queryFilter = filters[i].replace(/[()]/g, "");
+      let kv = queryFilter.split(":");
+      let k = kv[0].trim();
+      let v = kv[1].replace(/[\\\"]/g, "").split('OR').map(x => x.trim());
+
+      let lastFilter;
+
+      v.forEach(value => {
+        let filter: any = {};
+        filter.key = value;
+        filter.name = value;
+        filter.field = k;
+        filter.fieldLabel = k;
+
+        this.addFieldFilter(filter, false);
+        lastFilter = filter;
+      });
+
+      this.createAndSendQuery(lastFilter.silent);
+    }
+  }
+
+  addFieldFilter(filter, run:boolean = true) {
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
     let field = this.fields[filter.field] || {filters: {}};
 
     field.filters[filter.key] = {
@@ -56,10 +85,15 @@ class DashboardFilterController {
       onRemove: (filter.events !== undefined) && filter.events.remove
     };
 
+<<<<<<< HEAD
     let label = (filter.fieldLabel ? filter.fieldLabel : filter.field)
       + ' = \'' + filter.name + '\'';
 
     let query = '(' + filter.field + ':' + _.map(_.keys(field.filters), (key) => key.includes('TO') ? key : '\\"' + key + '\\"').join(' OR ') + ')';
+=======
+    let label = (filter.fieldLabel ? filter.fieldLabel : filter.field) + " = '" + filter.name + "'";
+    let query =  filter.field + ":(" + _.map(_.keys(field.filters), (key) => (key.includes('TO') || filter.field !== 'path' || filter.field !== 'mapped-path') ? key : "\\\"" + key + "\\\"").join(' OR ') + ')';
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 
     this.filters.push({
       source: filter.widget,
@@ -73,7 +107,10 @@ class DashboardFilterController {
 
     this.fields[filter.field] = field;
     this.lastSource = filter.widget;
-    this.createAndSendQuery(filter.silent);
+
+    if (run) {
+      this.createAndSendQuery(filter.silent);
+    }
   }
 
   removeFieldFilter(filter) {
@@ -111,7 +148,11 @@ class DashboardFilterController {
     }
 
     if (! _.isEmpty(fieldObject.filters)) {
+<<<<<<< HEAD
       fieldObject.query = '(' + field + ':' + _.map(_.keys(fieldObject.filters), (key) => key.includes('TO') ? key : '\\"' + key + '\\"').join(' OR ') + ')';
+=======
+      fieldObject.query = field + ":(" + _.map(_.keys(fieldObject.filters), (key) => (key.includes('TO') || field !== 'path' || field !== 'mapped-path') ? key:"\\\"" + key + "\\\"").join(' OR ') + ')';
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
       this.fields[field] = fieldObject;
     } else {
       delete this.fields[field];

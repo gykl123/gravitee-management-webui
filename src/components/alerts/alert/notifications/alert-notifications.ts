@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD:src/components/alerts/alert/notifications/alert-notifications.ts
 import {DurationTimeUnit} from '../../../../entities/alert';
+=======
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0:src/management/components/alerts/alert/notifications/alert-notifications.ts
 
 const AlertNotificationsComponent: ng.IComponentOptions = {
   bindings: {
@@ -36,6 +39,7 @@ const AlertNotificationsComponent: ng.IComponentOptions = {
 
     this.removeNotification = (idx: number) => {
       this.alert.notifications.splice(idx, 1);
+      this.parent.formAlert.$setDirty();
     };
   }
 };

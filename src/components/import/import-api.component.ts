@@ -25,7 +25,8 @@ const ImportComponent: ng.IComponentOptions = {
   template: require('./import-api.html'),
   bindings: {
     apiId: '<',
-    cancelAction: '&'
+    cancelAction: '&',
+    policies: '<'
   },
   controller: function(
     $state: StateService,
@@ -153,7 +154,11 @@ const ImportComponent: ng.IComponentOptions = {
       if (this.isForUpdate()) {
         this.cancel();
       }
+<<<<<<< HEAD:src/components/import/import-api.component.ts
     };
+=======
+    }
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0:src/management/components/import/import-api.component.ts
 
     this.importGraviteeIODefinition = () => {
       var id = (this.isForUpdate() ? this.apiId : null);
@@ -177,10 +182,15 @@ const ImportComponent: ng.IComponentOptions = {
         payload = this.importAPIFile.content;
       }
 
+<<<<<<< HEAD:src/components/import/import-api.component.ts
+=======
+    this.importSwagger = () => {
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0:src/management/components/import/import-api.component.ts
       let swagger = {
         with_documentation: this.importCreateDocumentation,
         with_path_mapping: this.importCreatePathMapping,
         with_policy_paths: this.importCreatePolicyPaths,
+<<<<<<< HEAD:src/components/import/import-api.component.ts
         with_policy_mocks: this.importCreateMocks,
         type,
         payload
@@ -188,6 +198,20 @@ const ImportComponent: ng.IComponentOptions = {
 
       if (this.isForUpdate()) {
         // @ts-ignore
+=======
+        with_policies: _.map(_.filter(this.policies, 'enable'), 'id')
+      };
+
+      if (this.importFileMode) {
+        swagger.type = 'INLINE';
+        swagger.payload = this.importAPIFile.content;
+      } else {
+        swagger.type = 'URL';
+        swagger.payload = this.apiDescriptorURL;
+      }
+
+      if(this.isForUpdate()) {
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0:src/management/components/import/import-api.component.ts
         ApiService.importSwagger(this.apiId, swagger).then((api) => {
           NotificationService.show('API successfully imported');
           $state.reload();

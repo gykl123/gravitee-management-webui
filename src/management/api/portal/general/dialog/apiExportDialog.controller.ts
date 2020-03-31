@@ -19,10 +19,18 @@ function DialogApiExportController($scope, $mdDialog, ApiService, apiId, base64,
   'ngInject';
 
   $scope.filteredFields = [
+<<<<<<< HEAD
     { id: 'groups', description: 'Groups', checked: true },
     { id: 'members', description: 'Members', checked: true },
     { id: 'pages', description: 'Pages', checked: true },
     { id: 'plans', description: 'Plans', checked: true }
+=======
+    { id: "groups", description: "Groups", checked: true },
+    { id: "members", description: "Members", checked: true },
+    { id: "pages", description: "Pages", checked: true },
+    { id: "plans", description: "Plans", checked: true },
+    { id: "metadata", description: "Metadata", checked: true }
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
   ];
 
   $scope.data = {

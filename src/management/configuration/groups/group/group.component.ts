@@ -13,11 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD:src/management/configuration/group/group.component.ts
 import GroupService from '../../../services/group.service';
 import NotificationService from '../../../services/notification.service';
 import { StateService } from '@uirouter/core';
 import _ = require('lodash');
 import UserService from '../../../services/user.service';
+=======
+import GroupService from "../../../../services/group.service";
+import NotificationService from "../../../../services/notification.service";
+import { StateService } from '@uirouter/core';
+import _ = require('lodash');
+import UserService from "../../../../services/user.service";
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0:src/management/configuration/groups/group/group.component.ts
 
 interface IGroupDetailComponentScope extends ng.IScope {
   groupApis: any[];
@@ -50,6 +58,12 @@ const GroupComponent: ng.IComponentOptions = {
     this.$rootScope = $rootScope;
 
     this.$onInit = () => {
+      this.updateMode = this.group !== undefined && this.group.id !== undefined;
+
+      if(!this.updateMode) {
+        this.group = {};
+      }
+
       $scope.groupApis = [];
       $scope.groupApplications = [];
       $scope.currentTab = 'users';
@@ -58,6 +72,9 @@ const GroupComponent: ng.IComponentOptions = {
         $scope.selectedApiRole = this.group.roles.API;
         $scope.selectedApplicationRole = this.group.roles.APPLICATION;
       }
+
+      this.apiByDefault = this.group.event_rules && this.group.event_rules.findIndex(rule => rule.event === 'API_CREATE') !== -1;
+      this.applicationByDefault = this.group.event_rules && this.group.event_rules.findIndex(rule => rule.event === 'APPLICATION_CREATE') !== -1;
     };
 
     this.updateRole = (member: any) => {
@@ -67,7 +84,22 @@ const GroupComponent: ng.IComponentOptions = {
       });
     };
 
+    this.associateToApis = () => {
+      GroupService.associate(this.group.id, "api").then((response) => {
+        $state.reload();
+        NotificationService.show('Group \'' + this.group.name + '\' has been associated to all APIs');
+      });
+    };
+
+    this.associateToApplications = () => {
+      GroupService.associate(this.group.id, "application").then((response) => {
+        $state.reload();
+        NotificationService.show('Group \'' + this.group.name + '\' has been associated to all applications');
+      });
+    };
+
     this.update = () => {
+<<<<<<< HEAD:src/management/configuration/group/group.component.ts
       let roles: any = {};
 
       if ($scope.selectedApiRole) {
@@ -81,14 +113,39 @@ const GroupComponent: ng.IComponentOptions = {
       } else {
         delete roles.APPLICATION;
       }
+=======
+      GroupService.updateEventRules(this.group, this.apiByDefault, this.applicationByDefault);
 
-      this.group.roles = roles;
-      GroupService.update(this.group).then((response) => {
-        this.group = response.data;
-        this.$onInit();
-        $scope.formGroup.$setPristine();
-        NotificationService.show('Group \'' + this.group.name + '\' has been updated');
-      });
+      if (!this.updateMode) {
+        GroupService.create(this.group).then((response) => {
+          $state.go('management.settings.groups.group', {groupId: response.data.id}, {reload: true});
+          NotificationService.show('Group \'' + this.group.name + '\' has been created');
+        });
+      } else {
+        let roles = {};
+
+        if ($scope.selectedApiRole) {
+          roles['API'] = $scope.selectedApiRole;
+        } else {
+          delete roles['API'];
+        }
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0:src/management/configuration/groups/group/group.component.ts
+
+        if ($scope.selectedApplicationRole) {
+          roles['APPLICATION'] = $scope.selectedApplicationRole;
+        } else {
+          delete roles['APPLICATION'];
+        }
+
+        this.group.roles = roles;
+
+        GroupService.update(this.group).then((response) => {
+          this.group = response.data;
+          this.$onInit();
+          $scope.formGroup.$setPristine();
+          NotificationService.show('Group \'' + this.group.name + '\' has been updated');
+        });
+      }
     };
 
     this.removeUser = (ev, member: any) => {
@@ -96,7 +153,7 @@ const GroupComponent: ng.IComponentOptions = {
       $mdDialog.show({
         controller: 'DialogConfirmController',
         controllerAs: 'ctrl',
-        template: require('../../../components/dialog/confirmWarning.dialog.html'),
+        template: require('../../../../components/dialog/confirmWarning.dialog.html'),
         clickOutsideToClose: true,
         locals: {
           msg: '',
@@ -186,7 +243,7 @@ const GroupComponent: ng.IComponentOptions = {
     };
 
     this.canSave = () => {
-      return this.group.manageable;
+      return !this.updateMode || this.group.manageable;
     };
 
     this.updateInvitation = (invitation: any) => {
@@ -244,7 +301,7 @@ const GroupComponent: ng.IComponentOptions = {
       $mdDialog.show({
         controller: 'DialogConfirmController',
         controllerAs: 'ctrl',
-        template: require('../../../components/dialog/confirmWarning.dialog.html'),
+        template: require('../../../../components/dialog/confirmWarning.dialog.html'),
         clickOutsideToClose: true,
         locals: {
           msg: '',

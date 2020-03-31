@@ -70,7 +70,11 @@ class ViewController {
         });
         that.$q.all(apiFunctions).then(() => {
           that.NotificationService.show('View ' + view.name + ' has been saved.');
+<<<<<<< HEAD
           that.$state.go('management.settings.view', {viewId: view.id}, {reload: true});
+=======
+          that.$state.go('management.settings.view', {viewId: view.key}, {reload:true})
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
         });
       });
   }
@@ -119,7 +123,7 @@ class ViewController {
           // we need to retrieve the API to get the all information required for the update
           this.ApiService.get(api.id).then(response => {
             let apiFound = response.data;
-            _.remove(apiFound.views, (v) => v === this.view.id);
+            _.remove(apiFound.views, (v) => v === this.view.key);
             this.ApiService.update(apiFound).then(() => {
               this.NotificationService.show('API \'' + api.name + '\' detached with success');
               _.remove(this.selectedAPIs, api);
@@ -140,6 +144,7 @@ class ViewController {
 
   toggleVisibility() {
     this.view.hidden = !this.view.hidden;
+    this.formChanged = true;
   }
 
   isHighlightApi(api) {

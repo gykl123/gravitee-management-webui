@@ -35,6 +35,7 @@ const GroupsComponent: ng.IComponentOptions = {
   ) {
     'ngInject';
     this.$rootScope = $rootScope;
+<<<<<<< HEAD
     this.$onInit = () => {
       this.initEventRules();
     };
@@ -78,33 +79,11 @@ const GroupsComponent: ng.IComponentOptions = {
         }
       });
     };
+=======
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 
-    this.showRenameGroupModal = (ev, group) => {
-      ev.stopPropagation();
-      $mdDialog.show({
-        controller: 'DialogAddGroupController',
-        controllerAs: 'dialogAddGroupCtrl',
-        template: require('./add-group.dialog.html'),
-        clickOutsideToClose: true,
-        locals: {
-          currentName: group.name,
-          currentDefaultApi: this.apiByDefault[group.id],
-          currentDefaultApplication: this.applicationByDefault[group.id],
-          action: 'Edit'
-        }
-      }).then( (updatedGroup) => {
-        if (updatedGroup && updatedGroup.name) {
-          group.name = updatedGroup.name;
-          GroupService.update(group).then(() => {
-            NotificationService.show('Group ' + group.name + ' has been updated.');
-            GroupService.list().then( (response) => {
-              this.groups = _.filter(response.data, 'manageable');
-                this.initEventRules();
-              }
-            );
-          });
-        }
-      });
+    this.create = () => {
+      $state.go('management.settings.groups.create');
     };
 
     this.removeGroup = (ev, groupId, groupName) => {
@@ -143,9 +122,13 @@ const GroupsComponent: ng.IComponentOptions = {
 
     this.selectGroupUrl = (group: any) => {
       if (group.manageable) {
-        return $state.href('management.settings.group', {groupId: group.id});
+        return $state.go('management.settings.groups.group', {groupId: group.id});
       }
       return null;
+    };
+
+    this.hasEvent = (group: any, event: string) => {
+      return group.event_rules && group.event_rules.findIndex(rule => rule.event === event) !== -1;
     };
   }
 };

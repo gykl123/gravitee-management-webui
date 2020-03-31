@@ -80,7 +80,12 @@ const IdentityProvidersComponent: ng.IComponentOptions = {
           }
         }
       }).then( response => {
+<<<<<<< HEAD
         NotificationService.show('Authentication is now ' + (this.settings.authentication.forceLogin.enabled ? 'mandatory' : 'optional') );
+=======
+        NotificationService.show("Authentication is now " + (this.settings.authentication.forceLogin.enabled?"mandatory":"optional") );
+        Constants.authentication.forceLogin =  response.data.authentication.forceLogin;
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
       });
     };
 
@@ -92,7 +97,12 @@ const IdentityProvidersComponent: ng.IComponentOptions = {
           }
         }
       }).then( response => {
+<<<<<<< HEAD
         NotificationService.show('Login form is now ' + (this.settings.authentication.localLogin.enabled ? 'enabled' : 'disabled'));
+=======
+        NotificationService.show("Login form is now " + (this.settings.authentication.localLogin.enabled?"enabled":"disabled"));
+        Constants.authentication.localLogin =  response.data.authentication.localLogin;
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
       });
     };
   }

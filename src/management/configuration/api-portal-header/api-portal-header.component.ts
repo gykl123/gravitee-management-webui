@@ -124,7 +124,12 @@ const ApiPortalHeaderComponent: ng.IComponentOptions = {
           }
         }
       }).then( response => {
+<<<<<<< HEAD
         NotificationService.show('Views are now ' + (this.settings.portal.apis.apiHeaderShowViews.enabled ? 'visible' : 'hidden'));
+=======
+        NotificationService.show("Views are now " + (this.settings.portal.apis.apiHeaderShowViews.enabled?"visible":"hidden"));
+        Constants.portal.apis.apiHeaderShowViews = response.data.portal.apis.apiHeaderShowViews;
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
       });
     };
 
@@ -138,7 +143,12 @@ const ApiPortalHeaderComponent: ng.IComponentOptions = {
           }
         }
       }).then( response => {
+<<<<<<< HEAD
         NotificationService.show('Tags are now ' + (this.settings.portal.apis.apiHeaderShowTags.enabled ? 'visible' : 'hidden'));
+=======
+        NotificationService.show("Tags are now " + (this.settings.portal.apis.apiHeaderShowTags.enabled?"visible":"hidden"));
+        Constants.portal.apis.apiHeaderShowTags = response.data.portal.apis.apiHeaderShowTags;
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
       });
     };
 

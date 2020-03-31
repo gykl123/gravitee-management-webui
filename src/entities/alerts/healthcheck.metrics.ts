@@ -24,7 +24,11 @@ export class HealthcheckMetrics extends Metrics {
   static RESPONSE_TIME: HealthcheckMetrics = new HealthcheckMetrics('response_time', 'Response Time (ms)',
     [ThresholdCondition.TYPE, ThresholdRangeCondition.TYPE, CompareCondition.TYPE]);
 
+<<<<<<< HEAD
   static TENANT: HealthcheckMetrics = new HealthcheckMetrics('tenant', 'Tenant', [StringCondition.TYPE], undefined, (type: number, id: string, $injector: any) => {
+=======
+  static TENANT: HealthcheckMetrics = new HealthcheckMetrics('tenant', 'Tenant', [StringCondition.TYPE],false, undefined, (type: number, id: string, $injector: any) => {
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
     let tenants: Tuple[] = [];
 
     // PLATFORM: Search for all registered tenants

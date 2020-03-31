@@ -18,7 +18,12 @@ import NotificationService from '../../../services/notification.service';
 import UserService from '../../../services/user.service';
 import RoleService from '../../../services/role.service';
 import _ = require('lodash');
+<<<<<<< HEAD
 import {IScope} from 'angular';
+=======
+import {IScope} from "angular";
+import {StateService} from "@uirouter/core";
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 
 interface IUserDetailComponentScope extends ng.IScope {
   selectedMgmtRole: string;
@@ -43,7 +48,9 @@ const UserDetailComponent: ng.IComponentOptions = {
     UserService: UserService,
     RoleService: RoleService,
     $scope: IUserDetailComponentScope,
-    $rootScope: IScope
+    $rootScope: IScope,
+    $window,
+    $state: StateService
   ) {
     'ngInject';
     this.$rootScope = $rootScope;
@@ -178,6 +185,12 @@ const UserDetailComponent: ng.IComponentOptions = {
         }
       );
     };
+
+    this.backToUsers = () => {
+      let page = $window.localStorage['usersTablePage'] || 1;
+      let query = $window.localStorage['usersTableQuery'] || undefined;
+      $state.go('management.settings.users', {q: query, page: page});
+    }
   }
 };
 

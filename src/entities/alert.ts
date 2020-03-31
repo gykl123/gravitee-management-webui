@@ -57,15 +57,21 @@ export abstract class Metrics {
   conditions: string[];
   loader: (type: number, id: string, $injector: any) => Tuple[];
   scopes: Scope[];
+  supportPropertyProjection: boolean = false;
 
+<<<<<<< HEAD
   static filterByScope(metrics: Metrics[], scope: Scope): Metrics[] {
     return metrics.filter((metric) => (metric.scopes === undefined || metric.scopes.indexOf(scope) !== -1));
   }
 
   constructor(key: string, name: string, conditions: string[], scopes?: Scope[], loader?: (type: number, id: string, $injector: any) => Tuple[]) {
+=======
+  constructor(key: string, name: string, conditions: string[], supportPropertyProjection?: boolean, scopes?: Scope[], loader?: (type: number, id: string, $injector: any) => Tuple[]) {
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
     this.key = key;
     this.name = name;
     this.conditions = conditions;
+    this.supportPropertyProjection = supportPropertyProjection;
     this.scopes = scopes;
     this.loader = loader;
   }
@@ -83,6 +89,7 @@ export class Alert {
   enabled: boolean;
   dampening: Dampening;
   conditions: any[];
+  projections: any[];
   notifications: any[];
   filters: any[];
 
@@ -134,8 +141,12 @@ export abstract class Condition {
 }
 
 export class ThresholdCondition extends Condition {
+<<<<<<< HEAD
 
   static TYPE: string = 'threshold';
+=======
+  static TYPE: string = "threshold";
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 
   static LT: Operator = new Operator('lt', 'less than');
   static LTE: Operator = new Operator('lte', 'less than or equals to');

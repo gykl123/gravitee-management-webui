@@ -87,7 +87,12 @@ import ApiCreationStep2Component from '../management/api/creation/steps/api-crea
 import ApiCreationStep3Component from '../management/api/creation/steps/api-creation-step3.component';
 import ApiCreationStep4Component from '../management/api/creation/steps/api-creation-step4.component';
 import ApiCreationStep5Component from '../management/api/creation/steps/api-creation-step5.component';
+<<<<<<< HEAD
 import ApiImportComponent from '../components/import/import-api.component';
+=======
+import ApiImportComponent from '../management/components/import/import-api.component';
+import NewApiController from '../management/api/creation/newApiPortal.controller';
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 
 // API Plan
 import ApiPlanComponent from '../management/api/api-plan.component';
@@ -180,13 +185,16 @@ import ImageDirective from '../components/image/image.directive';
 import EventsService from '../services/events.service';
 import AnalyticsService from '../services/analytics.service';
 import DashboardController from '../management/platform/dashboard/dashboard.controller';
+import PlatformLogsController from '../management/platform/logs/platform-logs.controller';
+import PlatformLogsComponent from '../management/platform/logs/platform-logs.component';
+import PlatformLogComponent from '../management/platform/logs/platform-log.component';
+
 import ViewsController from '../management/configuration/views/views.controller';
 import ViewController from './configuration/views/view/view.controller';
 import ViewService from '../services/view.service';
 import DeleteViewDialogController from '../management/configuration/views/delete.view.dialog.controller';
 import DeleteAPIViewDialogController from './configuration/views/view/delete-api-view.dialog.controller';
-import DialogAddGroupController from '../management/configuration/groups/add-group.dialog.controller';
-import DialogAddGroupMemberController from '../management/configuration/group/addMemberDialog.controller';
+import DialogAddGroupMemberController from './configuration/groups/group/addMemberDialog.controller';
 import RegistrationController from '../user/registration/registration.controller';
 import ConfirmController from '../user/registration/confirm/confirm.controller';
 import ResetPasswordController from '../user/resetPassword/resetPassword.controller';
@@ -199,6 +207,8 @@ import DialogSubscriptionCreateController
   from '../management/api/portal/subscriptions/subscription.create.dialog.controller';
 import DialogSubscriptionTransferController
   from '../management/api/portal/subscriptions/subscription.transfer.dialog.controller';
+import DialogSubscriptionChangeEndDateController
+  from '../management/api/portal/subscriptions/subscription.change.end.date.dialog.controller';
 import EmptyStateDirective from '../components/emptystate/emptystate.directive';
 import DialogPublishPlanController from '../management/api/portal/plans/publishPlanDialog.controller';
 import TagsController from '../management/configuration/tags/tags.controller';
@@ -312,7 +322,7 @@ import NewUserComponent from '../management/configuration/user/new/new-user.comp
 import DialogAddUserGroupController from '../management/configuration/user/dialog/addusergroup.dialog.controller';
 // Groups
 import GroupsComponent from '../management/configuration/groups/groups.component';
-import GroupComponent from '../management/configuration/group/group.component';
+import GroupComponent from './configuration/groups/group/group.component';
 import GroupService from '../services/group.service';
 // Dictionaries
 import DictionaryService from '../services/dictionary.service';
@@ -380,6 +390,7 @@ import NewApiPortalHeaderDialogController
   from './configuration/api-portal-header/new.api-portal-header.dialog.controller';
 import Base64Service from '../services/base64.service';
 // Alerts
+<<<<<<< HEAD
 import AlertService from '../services/alert.service';
 import AlertsComponent from '../components/alerts/alerts.component';
 import AlertComponent from '../components/alerts/alert/alert.component';
@@ -403,6 +414,35 @@ import AlertTriggerApplicationQuotaComponent from '../components/alerts/alert/tr
 
 import CircularPercentageComponent from '../components/circularPercentage/circularPercentage.component';
 import CircularPercentageController from '../components/circularPercentage/circularPercentage.controller';
+=======
+import AlertService from "../services/alert.service";
+import AlertsComponent from "./components/alerts/alerts.component";
+import AlertComponent from "./components/alerts/alert/alert.component";
+import AlertNotificationsComponent from "./components/alerts/alert/notifications/alert-notifications";
+import AlertNotificationComponent from "./components/alerts/alert/notifications/alert-notification";
+import AlertHistoryComponent from "./components/alerts/alert/history/alert-history.component";
+import AlertTriggerDampeningComponent from "./components/alerts/alert/triggers/trigger-dampening.component";
+import AlertTriggerWindowComponent from "./components/alerts/alert/triggers/trigger-window.component";
+import AlertTriggerFiltersComponent from "./components/alerts/alert/triggers/trigger-filters.component";
+import AlertTriggerFilterComponent from "./components/alerts/alert/triggers/trigger-filter.component";
+import AlertTriggerConditionComponent from "./components/alerts/alert/triggers/trigger-condition.component";
+import AlertTriggerConditionThresholdComponent from "./components/alerts/alert/triggers/conditions/trigger-condition-threshold.component";
+import AlertTriggerConditionThresholdRangeComponent from "./components/alerts/alert/triggers/conditions/trigger-condition-threshold-range.component";
+import AlertTriggerConditionStringComponent from "./components/alerts/alert/triggers/conditions/trigger-condition-string.component";
+import AlertTriggerConditionCompareComponent from "./components/alerts/alert/triggers/conditions/trigger-condition-compare.component";
+import AlertTriggerMetricsSimpleConditionComponent from "./components/alerts/alert/triggers/trigger-metrics-simple-condition.component";
+import AlertTriggerMetricsAggregationComponent from "./components/alerts/alert/triggers/trigger-metrics-aggregation.component";
+import AlertTriggerMetricsRateComponent from "./components/alerts/alert/triggers/trigger-metrics-rate.component";
+import AlertTriggerApiHealthCheckEndpointStatusChangedComponent from "./components/alerts/alert/triggers/trigger-api-hc-endpoint-status-changed.component";
+import AlertTriggerNodeLifecycleChangedComponent from "./components/alerts/alert/triggers/trigger-node-lifecycle-changed.component";
+import AlertTriggerNodeHealthcheckComponent from "./components/alerts/alert/triggers/trigger-node-healthcheck.component";
+import AlertTriggerApplicationQuotaComponent from "./components/alerts/alert/triggers/trigger-application-quota.component";
+import AlertTriggerProjectionsComponent from "./components/alerts/alert/triggers/projections/trigger-projections.component";
+import AlertTriggerProjectionComponent from "./components/alerts/alert/triggers/projections/trigger-projection.component";
+
+import CircularPercentageComponent from "./components/circularPercentage/circularPercentage.component";
+import CircularPercentageController from "./components/circularPercentage/circularPercentage.controller";
+>>>>>>> b344cf20dec4bd6f6c95a71a1a8a55969baa43e0
 
 import EntrypointService from '../services/entrypoint.service';
 import EntrypointComponent from './configuration/tags/entrypoint/entrypoint.component';
@@ -646,7 +686,6 @@ angular.module('gravitee-management', [uiRouter, permission, uiPermission, 'ngMa
   .controller('DeleteTenantDialogController', DeleteTenantDialogController)
   .component('groups', GroupsComponent)
   .component('group', GroupComponent)
-  .controller('DialogAddGroupController', DialogAddGroupController)
   .controller('DialogAddGroupMemberController', DialogAddGroupMemberController)
   .controller('RegistrationController', RegistrationController)
   .controller('ConfirmController', ConfirmController)
@@ -655,6 +694,7 @@ angular.module('gravitee-management', [uiRouter, permission, uiPermission, 'ngMa
   .controller('DialogSubscriptionAcceptController', DialogSubscriptionAcceptController)
   .controller('DialogSubscriptionCreateController', DialogSubscriptionCreateController)
   .controller('DialogSubscriptionTransferController', DialogSubscriptionTransferController)
+  .controller('DialogSubscriptionChangeEndDateController', DialogSubscriptionChangeEndDateController)
   .controller('DialogPublishPlanController', DialogPublishPlanController)
   .controller('TagsController', TagsController)
   .controller('MetadataController', MetadataController)
@@ -756,6 +796,7 @@ angular.module('gravitee-management', [uiRouter, permission, uiPermission, 'ngMa
   .component('apiHeader', ApiHeaderComponent)
   .component('apiCreation', ApiCreationComponent)
   .controller('ApiCreationController', ApiCreationController)
+  .controller('NewApiController', NewApiController)
   .component('apiCreationStep1', ApiCreationStep1Component)
   .component('apiCreationStep2', ApiCreationStep2Component)
   .component('apiCreationStep3', ApiCreationStep3Component)
@@ -928,6 +969,7 @@ angular.module('gravitee-management', [uiRouter, permission, uiPermission, 'ngMa
   .component('alertComponent', AlertComponent)
   .component('gvAlertNotification', AlertNotificationComponent)
   .component('gvAlertNotifications', AlertNotificationsComponent)
+  .component('gvAlertHistory', AlertHistoryComponent)
   .component('gvAlertTriggerWindow', AlertTriggerWindowComponent)
   .component('gvAlertTriggerDampening', AlertTriggerDampeningComponent)
   .component('gvAlertTriggerCondition', AlertTriggerConditionComponent)
@@ -942,7 +984,10 @@ angular.module('gravitee-management', [uiRouter, permission, uiPermission, 'ngMa
   .component('gvAlertTriggerMetricsRate', AlertTriggerMetricsRateComponent)
   .component('gvAlertTriggerApiHealthCheckStatusChanged', AlertTriggerApiHealthCheckEndpointStatusChangedComponent)
   .component('gvAlertTriggerNodeLifecycleChanged', AlertTriggerNodeLifecycleChangedComponent)
+  .component('gvAlertTriggerNodeHealthcheck', AlertTriggerNodeHealthcheckComponent)
   .component('gvAlertTriggerApplicationQuota', AlertTriggerApplicationQuotaComponent)
+  .component('gvAlertTriggerProjections', AlertTriggerProjectionsComponent)
+  .component('gvAlertTriggerProjection', AlertTriggerProjectionComponent)
 
   // CircularPercentageComponent
   .component('circularPercentage', CircularPercentageComponent)
@@ -958,6 +1003,11 @@ angular.module('gravitee-management', [uiRouter, permission, uiPermission, 'ngMa
   .service('DashboardService', DashboardService)
   .component('dashboard', AnalyticsDashboardComponent)
   .controller('DialogQueryFilterInformationController', DialogQueryFilterInformationController)
+
+  // Platform Analytics
+  .component('platformLogs', PlatformLogsComponent)
+  .component('platformLog', PlatformLogComponent)
+  .controller('PlatformLogsController', PlatformLogsController)
 
   .filter('humanDateFilter', function () {
     return function (input) {
@@ -975,6 +1025,11 @@ angular.module('gravitee-management', [uiRouter, permission, uiPermission, 'ngMa
       } else {
         return moment(input).format('D MMM YYYY HH:mm:ss');
       }
+    };
+  })
+  .filter('datetimeFilter', function () {
+    return function (input) {
+      return moment(input).format('D MMM YYYY HH:mm:ss');
     };
   })
   .filter('apiKeyFilter', function () {
